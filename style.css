@@ -228,6 +228,7 @@ body {
   font-size: 1.5rem;
   color: var(--primary);
   margin-top: 30px;
+  cursor: pointer;
 }
 
 @keyframes bounce {
@@ -274,6 +275,7 @@ body {
   color: var(--primary);
   margin-bottom: 30px;
   font-weight: normal;
+  text-align: center;
 }
 
 .typing-text {
@@ -342,7 +344,8 @@ body {
   text-align: center;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
-  animation: slideInUp 0.8s ease-out;
+  animation: slideInUp 0.8s ease-out forwards;
+  opacity: 0;
   animation-delay: var(--delay);
 }
 
@@ -351,12 +354,9 @@ body {
   box-shadow: 0 15px 50px rgba(255, 107, 157, 0.3);
 }
 
-.reason-number {
+.reason-icon {
   display: inline-block;
   font-size: 3rem;
-  color: var(--primary);
-  font-weight: bold;
-  opacity: 0.3;
   margin-bottom: 15px;
 }
 
@@ -372,188 +372,150 @@ body {
   font-size: 1rem;
 }
 
-/* ===== GALLERY SECTION ===== */
-.gallery-section {
+/* ===== LOVE LETTER SECTION ===== */
+.love-letter-section {
   padding: 100px 20px;
   background: linear-gradient(135deg, rgba(201, 132, 212, 0.1) 0%, var(--cream) 100%);
 }
 
-.gallery-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
-  margin-top: 50px;
-}
-
-@media (max-width: 768px) {
-  .gallery-container {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-}
-
-.photo-display {
+.letter-card {
+  background: white;
+  border-radius: 20px;
+  padding: 60px 50px;
+  max-width: 900px;
+  margin: 0 auto;
+  box-shadow: 0 15px 60px rgba(0, 0, 0, 0.1);
+  border-left: 5px solid var(--primary);
+  animation: slideInUp 0.8s ease-out;
   position: relative;
-  display: flex;
-  justify-content: center;
 }
 
-.main-photo {
-  width: 100%;
-  max-width: 350px;
-  border-radius: 15px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-  animation: photoZoom 0.8s ease-out;
+.letter-title {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 40px;
+  text-align: center;
+  font-weight: normal;
 }
 
-@keyframes photoZoom {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.letter-content {
+  font-size: 1.1rem;
+  line-height: 1.9;
+  color: var(--dark);
+  margin-bottom: 40px;
+  text-align: justify;
+  min-height: 200px;
 }
 
-.photo-glow {
+.letter-content p {
+  margin-bottom: 20px;
+}
+
+.letter-signature {
+  font-size: 1.3rem;
+  color: var(--secondary);
+  text-align: right;
+  font-style: italic;
+  margin-top: 40px;
+}
+
+.letter-sparkles {
   position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
-  border-radius: 15px;
-  opacity: 0.3;
-  animation: glowPulse 2.5s ease-in-out infinite;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  animation: sparkleRotate 3s ease-in-out infinite;
+}
+
+@keyframes sparkleRotate {
+  0%,
+  100% {
+    transform: rotate(0deg);
+    opacity: 0.5;
+  }
+  50% {
+    transform: rotate(180deg);
+    opacity: 1;
+  }
+}
+
+/* ===== QUOTES SECTION ===== */
+.quotes-section {
+  padding: 100px 20px;
+  background: linear-gradient(135deg, var(--light) 0%, rgba(255, 107, 157, 0.08) 100%);
+  position: relative;
+}
+
+.rose-petals {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
   pointer-events: none;
 }
 
-.gallery-info h3 {
-  font-size: 2rem;
-  color: var(--primary);
-  margin-bottom: 15px;
-  font-weight: normal;
-}
-
-.gallery-info p {
-  font-size: 1.1rem;
-  color: var(--dark);
-  line-height: 1.8;
-}
-
-.hearts-animation {
-  margin-top: 30px;
-  font-size: 2rem;
-  animation: heartBeat 1.5s ease-in-out infinite;
-}
-
-.hearts-animation::before {
-  content: "💕 💕 💕";
-  letter-spacing: 10px;
-}
-
-@keyframes heartBeat {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  25% {
-    transform: scale(1.1);
-  }
-  50% {
-    transform: scale(1);
-  }
-}
-
-/* ===== LOVE STORY SECTION ===== */
-.love-story {
-  padding: 100px 20px;
-  background: linear-gradient(135deg, var(--light) 0%, rgba(255, 107, 157, 0.08) 100%);
-}
-
-.story-timeline {
-  position: relative;
-  max-width: 800px;
-  margin: 50px auto 0;
-  padding: 40px 0;
-}
-
-.story-timeline::before {
-  content: "";
+.rose-petals::before,
+.rose-petals::after {
+  content: "🌹";
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 3px;
-  height: 100%;
-  background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+  font-size: 30px;
+  animation: petalFall 8s linear infinite;
 }
 
-@media (max-width: 768px) {
-  .story-timeline::before {
-    left: 30px;
+.rose-petals::before {
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.rose-petals::after {
+  right: 10%;
+  animation-delay: 4s;
+}
+
+@keyframes petalFall {
+  0% {
+    top: -50px;
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
   }
 }
 
-.timeline-item {
-  margin-bottom: 50px;
+.quotes-gallery {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
-  animation: slideInUp 0.8s ease-out;
-}
-
-.timeline-item:nth-child(even) {
-  direction: rtl;
-}
-
-.timeline-item:nth-child(even) > * {
-  direction: ltr;
-}
-
-@media (max-width: 768px) {
-  .timeline-item {
-    grid-template-columns: 80px 1fr;
-    gap: 20px;
-  }
-
-  .timeline-item:nth-child(even) {
-    direction: ltr;
-  }
-}
-
-.timeline-dot {
-  width: 20px;
-  height: 20px;
-  background: var(--primary);
-  border: 4px solid white;
-  border-radius: 50%;
-  margin: 0 auto;
-  box-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
   position: relative;
-  z-index: 2;
+  z-index: 1;
 }
 
-.timeline-content {
+.quote-card {
   background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  padding: 40px 35px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border-top: 4px solid var(--secondary);
+  animation: slideInUp 0.8s ease-out forwards;
+  opacity: 0;
+  animation-delay: var(--delay);
 }
 
-.timeline-content h3 {
-  font-size: 1.5rem;
-  color: var(--secondary);
-  margin-bottom: 10px;
-  font-weight: normal;
+.quote-card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 20px 60px rgba(255, 107, 157, 0.2);
 }
 
-.timeline-content p {
+.quote-card p {
+  font-size: 1.2rem;
   color: var(--dark);
-  font-size: 1rem;
+  font-style: italic;
+  line-height: 1.8;
 }
 
 /* ===== PROPOSAL SECTION ===== */
@@ -580,11 +542,12 @@ body {
   animation: glowPulse 3s ease-in-out infinite;
 }
 
-.proposal-title {
+.proposal-label {
   font-size: 3rem;
   color: var(--primary);
   margin-bottom: 20px;
   animation: fadeInDown 0.8s ease-out;
+  text-align: center;
 }
 
 .main-proposal {
@@ -594,6 +557,7 @@ body {
   font-weight: normal;
   letter-spacing: 3px;
   animation: fadeInDown 0.8s ease-out 0.2s both;
+  text-align: center;
 }
 
 .proposal-subtitle {
@@ -603,6 +567,7 @@ body {
   margin: 0 auto 60px;
   line-height: 1.8;
   animation: fadeInUp 0.8s ease-out 0.4s both;
+  text-align: center;
 }
 
 @keyframes fadeInDown {
@@ -622,6 +587,8 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   animation: fadeInUp 0.8s ease-out 0.6s both;
+  position: relative;
+  z-index: 2;
 }
 
 .yes-btn,
@@ -662,37 +629,50 @@ body {
   transform: translateY(-5px);
 }
 
-/* ===== CELEBRATION SECTION ===== */
-.celebration {
-  min-height: 100vh;
-  display: flex;
+/* ===== CELEBRATION MODAL (FIXED) ===== */
+.celebration-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  display: none;
   align-items: center;
   justify-content: center;
-  padding: 60px 20px;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-  position: relative;
+  z-index: 9999;
   overflow: hidden;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.8s ease-out;
 }
 
-.celebration.show {
-  opacity: 1;
-  visibility: visible;
+.celebration-modal.show {
+  display: flex;
 }
 
 .celebration-content {
   text-align: center;
   color: white;
   position: relative;
-  z-index: 2;
+  z-index: 10;
+  max-width: 90vw;
+}
+
+#confetti {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1;
+}
+
+#roseRain {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .celebration-title {
   font-size: clamp(3rem, 15vw, 7rem);
   margin-bottom: 30px;
   animation: scaleInBounce 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  font-weight: bold;
 }
 
 @keyframes scaleInBounce {
@@ -706,7 +686,7 @@ body {
   }
 }
 
-.heart-explosion {
+#heartBurst {
   height: 300px;
   margin: 40px 0;
   position: relative;
@@ -727,50 +707,11 @@ body {
   animation: fadeInUp 1s ease-out 1s both;
 }
 
-.final-hearts {
+.made-with-love {
+  font-size: 1rem;
   margin-top: 50px;
-  font-size: 3rem;
-  animation: heartShine 1.5s ease-in-out infinite;
-}
-
-.final-hearts::before {
-  content: "💕 💍 💕";
-  letter-spacing: 20px;
-}
-
-@keyframes heartShine {
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.6;
-    transform: scale(1.1);
-  }
-}
-
-.confetti-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.confetti {
-  position: fixed;
-  pointer-events: none;
-  animation: confettiFall linear;
-}
-
-@keyframes confettiFall {
-  to {
-    transform: translateY(100vh) rotateZ(720deg);
-    opacity: 0;
-  }
+  opacity: 0.9;
+  animation: fadeInUp 1s ease-out 1.5s both;
 }
 
 /* ===== MUSIC TOGGLE ===== */
@@ -828,7 +769,11 @@ body {
     padding: 40px 25px;
   }
 
-  .proposal-title {
+  .letter-card {
+    padding: 40px 25px;
+  }
+
+  .proposal-label {
     font-size: 2rem;
   }
 
@@ -852,5 +797,17 @@ body {
     bottom: 20px;
     right: 20px;
     font-size: 1.2rem;
+  }
+
+  .celebration-title {
+    font-size: clamp(2rem, 12vw, 4rem);
+  }
+
+  .message-to-her {
+    font-size: 1.5rem;
+  }
+
+  .final-message {
+    font-size: 1rem;
   }
 }
