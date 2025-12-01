@@ -12,8 +12,9 @@
       <div class="stars"></div>
       <div class="hero-content">
         <div class="photo-frame-container">
+          <!-- Updated with real Urmila photo -->
           <div class="photo-frame">
-            <img src="images/urmila.jpg" alt="Urmila" />
+            <img src="/images/urmila.jpg" alt="Urmila" />
             <div class="frame-glow"></div>
           </div>
           <div class="floating-hearts"></div>
@@ -42,10 +43,10 @@
       </div>
     </section>
 
-    <!-- Surprise Section 1: Reasons Why -->
+    <!-- Surprise Section 1: Why I Love You -->
     <section class="why-section" id="whySection">
       <div class="section-container">
-        <h2 class="section-title">Why I Fell for You</h2>
+        <h2 class="section-title">Why I Fell For You</h2>
         <div class="reasons-grid">
           <div class="reason-card" style="--delay: 0s">
             <span class="reason-icon">✨</span>
@@ -93,7 +94,56 @@
       </div>
     </section>
 
-    <!-- Surprise Section 3: Love Quotes Gallery -->
+    <!-- Surprise Section 3: Memory Timeline -->
+    <section class="timeline-section" id="timelineSection">
+      <div class="section-container">
+        <h2 class="section-title">Our Beautiful Journey</h2>
+        <div class="timeline">
+          <div class="timeline-item" style="--delay: 0s">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>When We Met</h3>
+              <p>
+                The moment you entered my life, everything changed. It was like
+                the universe was just waiting for this moment.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item" style="--delay: 0.3s">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>First Time I Realized</h3>
+              <p>
+                I fell in love with your smile, your voice, your kindness. There
+                was no specific moment - it was all of you.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item" style="--delay: 0.6s">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Every Day With You</h3>
+              <p>
+                You make ordinary days extraordinary. Your presence is the
+                greatest gift I could ever ask for.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item" style="--delay: 0.9s">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Forever Starts Now</h3>
+              <p>
+                I want to spend the rest of my life making you as happy as you
+                make me every single day.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Surprise Section 4: Love Quotes Gallery -->
     <section class="quotes-section" id="quotesSection">
       <div class="section-container">
         <h2 class="section-title">What Love Means To Me</h2>
@@ -136,22 +186,20 @@
       </div>
     </section>
 
-    <!-- Celebration Modal (Surprise 4: Final) -->
-    <div class="celebration-modal" id="celebrationModal">
-      <div class="celebration-content">
-        <div class="confetti" id="confetti"></div>
-        <div class="rose-rain" id="roseRain"></div>
-        <h1 class="celebration-title">YES! 💕</h1>
-        <div class="heart-burst" id="heartBurst"></div>
-        <h2 class="message-to-her">You Just Made Me The Happiest Man Alive!</h2>
-        <p class="final-message">
-          Thank you, Urmila. You just made my world perfect.<br />
-          I love you more than words could ever express.<br />
-          Let's build an amazing future together.<br />
-          Forever is not long enough for me to love you. 🌹✨
-        </p>
-        <p class="made-with-love">Made with Love by Shubham ❤️ For Urmila</p>
-      </div>
+    <!-- New beautiful modal celebration popup instead of fullscreen -->
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="celebration-popup" id="celebrationPopup">
+      <button class="close-btn" id="closeBtn">×</button>
+      <div class="popup-confetti" id="popupConfetti"></div>
+      <h1 class="popup-title">YES! 💕</h1>
+      <div class="heart-burst-popup" id="heartBurstPopup"></div>
+      <h2 class="popup-message">You Just Made Me The Happiest Man Alive!</h2>
+      <p class="popup-text">
+        Thank you, Urmila. You just made my world perfect.<br />
+        I love you more than words could express.<br />
+        Let's build an amazing future together. 🌹✨
+      </p>
+      <p class="made-with-love">Made with Love by Shubham ❤️ For Urmila</p>
     </div>
 
     <!-- Music Toggle -->

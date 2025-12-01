@@ -1,4 +1,3 @@
-// Typing Animation for Messages
 const typingMessages = [
   "Urmila, you have the purest heart and the most beautiful soul.",
   "Every moment with you feels like a blessing.",
@@ -87,26 +86,26 @@ function typeLoveLetter() {
   typeParagraph();
 }
 
-function createHeartBurst(containerId) {
+function createHeartBurstPopup(containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
 
   container.innerHTML = "";
 
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 20; i++) {
     const heart = document.createElement("div");
     heart.innerHTML = "💕";
     heart.style.position = "absolute";
     heart.style.left = "50%";
     heart.style.top = "50%";
-    heart.style.fontSize = "40px";
+    heart.style.fontSize = "30px";
     heart.style.pointerEvents = "none";
     heart.style.userSelect = "none";
 
-    const angle = (i / 30) * Math.PI * 2;
-    const velocity = 3 + Math.random() * 4;
-    const tx = Math.cos(angle) * velocity * 40;
-    const ty = Math.sin(angle) * velocity * 40;
+    const angle = (i / 20) * Math.PI * 2;
+    const velocity = 2 + Math.random() * 3;
+    const tx = Math.cos(angle) * velocity * 30;
+    const ty = Math.sin(angle) * velocity * 30;
 
     heart.animate(
       [
@@ -117,7 +116,7 @@ function createHeartBurst(containerId) {
         },
       ],
       {
-        duration: 2000,
+        duration: 1500,
         easing: "ease-out",
       }
     );
@@ -126,131 +125,77 @@ function createHeartBurst(containerId) {
   }
 }
 
-function createConfetti() {
-  const container = document.createElement("div");
-  container.id = "confetti";
-  document.body.appendChild(container);
+function createPopupConfetti() {
+  const container = document.getElementById("popupConfetti");
+  if (!container) return;
 
-  const emojis = ["💕", "💍", "✨", "🎉", "💖", "🌹"];
+  const emojis = ["💕", "💍", "✨", "🌹", "💖"];
 
-  for (let i = 0; i < 80; i++) {
+  for (let i = 0; i < 40; i++) {
     const confetti = document.createElement("div");
     confetti.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-    confetti.style.position = "fixed";
+    confetti.style.position = "absolute";
     confetti.style.left = Math.random() * 100 + "%";
-    confetti.style.top = "-20px";
-    confetti.style.fontSize = 16 + Math.random() * 20 + "px";
+    confetti.style.top = Math.random() * 100 + "%";
+    confetti.style.fontSize = 12 + Math.random() * 16 + "px";
     confetti.style.opacity = Math.random();
     confetti.style.pointerEvents = "none";
-    confetti.style.zIndex = "2";
-
-    const duration = 2.5 + Math.random() * 2;
-    const delay = Math.random() * 0.5;
-
-    confetti.animate(
-      [
-        {
-          transform: `translate(${
-            (Math.random() - 0.5) * 100
-          }px, 0) rotate(0deg)`,
-          opacity: 1,
-        },
-        {
-          transform: `translate(${
-            (Math.random() - 0.5) * 200
-          }px, 100vh) rotate(${Math.random() * 720}deg)`,
-          opacity: 0,
-        },
-      ],
-      {
-        duration: duration * 1000,
-        delay: delay * 1000,
-        easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-      }
-    );
+    confetti.style.animation = `popupConfettiFall ${
+      2 + Math.random() * 2
+    }s ease-out forwards`;
 
     container.appendChild(confetti);
-
-    setTimeout(() => confetti.remove(), (duration + delay) * 1000 + 100);
+    setTimeout(() => confetti.remove(), 4000);
   }
-
-  setTimeout(() => container.remove(), 6000);
 }
 
-function createRoseRain() {
-  const container = document.createElement("div");
-  container.id = "roseRain";
-  document.body.appendChild(container);
-
-  for (let i = 0; i < 50; i++) {
-    const rose = document.createElement("div");
-    rose.innerHTML = "🌹";
-    rose.style.position = "fixed";
-    rose.style.left = Math.random() * 100 + "%";
-    rose.style.top = "-50px";
-    rose.style.fontSize = "30px";
-    rose.style.pointerEvents = "none";
-    rose.style.zIndex = "2";
-    rose.style.opacity = Math.random() * 0.7 + 0.3;
-
-    const duration = 4 + Math.random() * 3;
-    const delay = Math.random() * 1;
-
-    rose.animate(
-      [
-        { transform: "translateY(0) rotate(0deg)", opacity: 1 },
-        {
-          transform: `translateY(100vh) rotate(${Math.random() * 360}deg)`,
-          opacity: 0,
-        },
-      ],
-      {
-        duration: duration * 1000,
-        delay: delay * 1000,
-        easing: "ease-in",
-      }
-    );
-
-    container.appendChild(rose);
-
-    setTimeout(() => rose.remove(), (duration + delay) * 1000 + 100);
-  }
-
-  setTimeout(() => container.remove(), 8000);
-}
-
-// Music Toggle
-const musicToggle = document.getElementById("musicToggle");
-const bgMusic = document.getElementById("bgMusic");
-
-if (musicToggle && bgMusic) {
-  musicToggle.addEventListener("click", () => {
-    if (bgMusic.paused) {
-      bgMusic.play().catch(() => {
-        console.log("[v0] Audio playback not supported");
-      });
-      musicToggle.classList.add("playing");
-    } else {
-      bgMusic.pause();
-      musicToggle.classList.remove("playing");
+// Add keyframe animation for popup confetti
+const style = document.createElement("style");
+style.textContent = `
+  @keyframes popupConfettiFall {
+    to {
+      transform: translateY(150px) rotate(360deg);
+      opacity: 0;
     }
+  }
+`;
+document.head.appendChild(style);
+
+const musicToggle = document.getElementById("musicToggle");
+
+if (musicToggle) {
+  musicToggle.addEventListener("click", () => {
+    musicToggle.classList.toggle("playing");
   });
 }
 
 const yesBtn = document.getElementById("yesBtn");
 if (yesBtn) {
   yesBtn.addEventListener("click", () => {
-    // Show celebration modal
-    const modal = document.getElementById("celebrationModal");
-    if (modal) {
-      modal.classList.add("show");
+    const backdrop = document.getElementById("modalBackdrop");
+    const popup = document.getElementById("celebrationPopup");
 
-      // Trigger animations
+    if (backdrop && popup) {
+      backdrop.classList.add("show");
+      popup.classList.add("show");
+
       setTimeout(() => {
-        createHeartBurst("heartBurst");
-        createConfetti();
-        createRoseRain();
-      }, 300);
+        createHeartBurstPopup("heartBurstPopup");
+        createPopupConfetti();
+      }, 400);
+    }
+  });
+}
+
+const closeBtn = document.getElementById("closeBtn");
+if (closeBtn) {
+  closeBtn.addEventListener("click", () => {
+    const backdrop = document.getElementById("modalBackdrop");
+    const popup = document.getElementById("celebrationPopup");
+
+    if (backdrop && popup) {
+      backdrop.classList.remove("show");
+      popup.classList.remove("show");
     }
   });
 }
@@ -274,12 +219,10 @@ if (noBtn) {
   });
 }
 
-// Initialize on load
 document.addEventListener("DOMContentLoaded", () => {
   typeMessage();
   typeLoveLetter();
 
-  // Smooth scrolling for scroll indicator
   document.querySelector(".scroll-indicator")?.addEventListener("click", () => {
     document.getElementById("messages").scrollIntoView({ behavior: "smooth" });
   });
@@ -299,6 +242,8 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, observerOptions);
 
-document.querySelectorAll(".reason-card, .quote-card").forEach((el) => {
-  observer.observe(el);
-});
+document
+  .querySelectorAll(".reason-card, .quote-card, .timeline-item")
+  .forEach((el) => {
+    observer.observe(el);
+  });
