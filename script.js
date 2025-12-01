@@ -1,205 +1,321 @@
-// Performance Optimization: Reduce particle count
-const PARTICLE_COUNT = 12;
-const HEART_PARTICLES = 8;
-const CONFETTI_COUNT = 30;
+// Optimize performance with requestAnimationFrame
+let animationFrame;
 
-// Optimized particle generation
+// ==================== Particle System ====================
 function createParticles() {
   const container = document.getElementById("particlesContainer");
   if (!container) return;
 
-  for (let i = 0; i < PARTICLE_COUNT; i++) {
+  for (let i = 0; i < 30; i++) {
     const particle = document.createElement("div");
-    particle.className = "particle";
-    particle.textContent = ["❤️", "✨", "💕", "🌹"][
-      Math.floor(Math.random() * 4)
-    ];
-
-    const x = Math.random() * 100;
-    const y = Math.random() * 100;
-    const duration = 15 + Math.random() * 10;
-
-    particle.style.left = x + "%";
-    particle.style.top = y + "%";
-    particle.style.animation = `float ${duration}s infinite linear`;
-    particle.style.opacity = Math.random() * 0.5 + 0.3;
-
+    particle.style.cssText = `
+            position: absolute;
+            width: ${Math.random() * 4 + 2}px;
+            height: ${Math.random() * 4 + 2}px;
+            background: ${
+              [
+                "rgba(231, 84, 128, 0.5)",
+                "rgba(212, 165, 217, 0.5)",
+                "rgba(244, 212, 168, 0.5)",
+              ][Math.floor(Math.random() * 3)]
+            };
+            border-radius: 50%;
+            top: ${Math.random() * 100}%;
+            left: ${Math.random() * 100}%;
+            animation: particleFloat ${Math.random() * 8 + 4}s linear infinite;
+            pointer-events: none;
+        `;
     container.appendChild(particle);
   }
-}
 
-// Optimized CSS animation for particles
-function addParticleAnimations() {
   const style = document.createElement("style");
   style.textContent = `
-        @keyframes float {
-            0% { transform: translateY(0) translateX(0); opacity: 0.3; }
-            25% { opacity: 0.6; }
-            50% { transform: translateY(-100vh) translateX(100px); opacity: 0.4; }
-            100% { transform: translateY(-200vh) translateX(-100px); opacity: 0; }
-        }
-        
-        @keyframes heart-float {
-            0% { transform: translateY(100vh) translateX(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-100vh) translateX(150px) scale(0.5); opacity: 0; }
-        }
-        
-        @keyframes confetti-fall {
-            0% { transform: translateY(0) rotateZ(0deg) scale(1); opacity: 1; }
-            100% { transform: translateY(100vh) rotateZ(360deg) scale(0); opacity: 0; }
+        @keyframes particleFloat {
+            0% { transform: translateY(0px) translateX(0px); opacity: 1; }
+            100% { transform: translateY(-${
+              Math.random() * 100 + 50
+            }px) translateX(${Math.random() * 50 - 25}px); opacity: 0; }
         }
     `;
   document.head.appendChild(style);
 }
 
-// Cursor heart trail (optimized - every 50ms max)
-let lastHeartTime = 0;
-document.addEventListener("mousemove", (e) => {
-  const now = Date.now();
-  if (now - lastHeartTime < 50) return; // Throttle to 50ms
-  lastHeartTime = now;
+// ==================== Sparkles System ====================
+function createSparkles() {
+  const container = document.getElementById("sparklesContainer");
+  if (!container) return;
 
-  const heart = document.createElement("div");
-  heart.className = "particle";
-  heart.textContent = "❤️";
-  heart.style.left = e.clientX + "px";
-  heart.style.top = e.clientY + "px";
-  heart.style.position = "fixed";
-  heart.style.pointerEvents = "none";
-  heart.style.fontSize = "20px";
-  heart.style.animation = "heart-float 1s ease-out forwards";
+  for (let i = 0; i < 20; i++) {
+    const sparkle = document.createElement("div");
+    sparkle.style.cssText = `
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(244, 212, 168, 0.8);
+            border-radius: 50%;
+            top: ${Math.random() * 100}%;
+            left: ${Math.random() * 100}%;
+            animation: sparkleFlash ${
+              Math.random() * 3 + 2
+            }s ease-in-out infinite;
+            pointer-events: none;
+        `;
+    container.appendChild(sparkle);
+  }
 
-  document.body.appendChild(heart);
+  const style = document.createElement("style");
+  style.textContent = `
+        @keyframes sparkleFlash {
+            0%, 100% { opacity: 0; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+    `;
+  document.head.appendChild(style);
+}
 
-  setTimeout(() => heart.remove(), 1000);
-});
+// ==================== Confetti Animation ====================
+function createConfetti() {
+  const confettiContainer = document.getElementById("confetti");
+  confettiContainer.innerHTML = "";
 
-// Typing animation
-function typeText() {
-  const typingText = document.getElementById("typingText");
-  if (!typingText) return;
+  for (let i = 0; i < 50; i++) {
+    const confetti = document.createElement("div");
+    const randomX = Math.random() * window.innerWidth;
+    const randomDelay = Math.random() * 0.5;
+    const randomDuration = Math.random() * 2 + 2;
 
-  const fullText =
-    "Urmila, you have the purest heart and the most beautiful soul.\nEvery moment with you feels like a blessing.\nI may not be perfect, but my feelings for you are.";
+    confetti.style.cssText = `
+            position: fixed;
+            left: ${randomX}px;
+            top: -10px;
+            width: 10px;
+            height: 10px;
+            background: ${
+              ["#e75480", "#d4a5d9", "#f4d4a8"][Math.floor(Math.random() * 3)]
+            };
+            border-radius: 50%;
+            pointer-events: none;
+            animation: fall ${randomDuration}s linear ${randomDelay}s forwards;
+        `;
+    confettiContainer.appendChild(confetti);
+  }
+
+  const style = document.createElement("style");
+  style.textContent = `
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(${
+              window.innerHeight + 100
+            }px) rotate(360deg); opacity: 0; }
+        }
+    `;
+  document.head.appendChild(style);
+}
+
+// ==================== Typing Text Animation ====================
+function typeText(element, text, speed = 50) {
+  element.innerHTML = "";
   let index = 0;
 
   function type() {
-    if (index < fullText.length) {
-      typingText.textContent += fullText[index];
+    if (index < text.length) {
+      element.textContent += text[index];
       index++;
-      setTimeout(type, 50);
+      setTimeout(type, speed);
     }
   }
 
   type();
 }
 
-// Confetti explosion (optimized)
-function triggerConfetti() {
-  const duration = 3000;
-  const end = Date.now() + duration;
+// ==================== Scroll Intersection Observer ====================
+function observeElements() {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const section = entry.target.id;
 
-  function frame() {
-    const confetti = document.createElement("div");
-    confetti.className = "particle";
-    confetti.textContent = ["❤️", "💕", "✨", "🎉"][
-      Math.floor(Math.random() * 4)
-    ];
-    confetti.style.left = Math.random() * 100 + "%";
-    confetti.style.top = "-20px";
-    confetti.style.position = "fixed";
-    confetti.style.pointerEvents = "none";
-    confetti.style.fontSize = Math.random() * 20 + 15 + "px";
-    confetti.style.animation =
-      "confetti-fall " + (Math.random() * 2 + 2) + "s ease-in forwards";
+          if (
+            section === "messageSection" &&
+            !entry.target.classList.contains("typed")
+          ) {
+            typeText(
+              document.getElementById("typingText"),
+              "Urmila, you have the purest heart and the most beautiful soul.\n\nEvery moment with you feels like a blessing.\n\nI may not be perfect, but my feelings for you are. 💕",
+              40
+            );
+            entry.target.classList.add("typed");
+          }
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
 
-    document.body.appendChild(confetti);
-
-    setTimeout(() => confetti.remove(), 3000);
-
-    if (Date.now() < end) {
-      requestAnimationFrame(frame);
-    }
-  }
-
-  frame();
+  document.querySelectorAll("section").forEach((section) => {
+    observer.observe(section);
+  });
 }
 
-// Proposal button click handler
-document.addEventListener("DOMContentLoaded", () => {
-  // Initialize
-  addParticleAnimations();
-  createParticles();
-  typeText();
-
-  // Proposal button
-  const proposalButton = document.getElementById("proposalButton");
-  if (proposalButton) {
-    proposalButton.addEventListener("click", () => {
-      triggerConfetti();
-
-      setTimeout(() => {
-        const celebrationSection =
-          document.getElementById("celebrationSection");
-        if (celebrationSection) {
-          celebrationSection.classList.add("show");
-          celebrationSection.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 500);
-    });
-  }
-
-  // Music toggle
+// ==================== Music Toggle ====================
+function setupMusicToggle() {
   const musicToggle = document.getElementById("musicToggle");
-  const backgroundMusic = document.getElementById("backgroundMusic");
+  const bgMusic = document.getElementById("bgMusic");
 
-  if (musicToggle && backgroundMusic) {
-    let isPlaying = false;
+  // Create a simple sine wave audio for romantic background music
+  function createAudio() {
+    const audioContext = new (window.AudioContext ||
+      window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
 
-    musicToggle.addEventListener("click", () => {
-      if (isPlaying) {
-        backgroundMusic.pause();
-        musicToggle.style.opacity = "0.6";
-      } else {
-        backgroundMusic.volume = 0.3;
-        backgroundMusic.play().catch(() => {
-          console.log("Audio autoplay prevented by browser");
-        });
-        musicToggle.style.opacity = "1";
-      }
-      isPlaying = !isPlaying;
-    });
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+    oscillator.frequency.value = 220; // A note
+    gain.gain.setValueAtTime(0.1, audioContext.currentTime);
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 2);
   }
 
-  // Smooth scroll for scroll indicator
-  const scrollIndicator = document.querySelector(".scroll-indicator");
-  if (scrollIndicator) {
-    scrollIndicator.addEventListener("click", () => {
-      window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
-    });
-  }
-});
+  let isPlaying = false;
 
-// Intersection Observer for fade-in animations (efficient)
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: "0px 0px -50px 0px",
-};
+  musicToggle.addEventListener("click", () => {
+    isPlaying = !isPlaying;
+    musicToggle.classList.toggle("playing", isPlaying);
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = "1";
-      entry.target.style.transform = "translateY(0)";
+    if (isPlaying) {
+      musicToggle.textContent = "🎵";
+    } else {
+      musicToggle.textContent = "🎵";
     }
   });
-}, observerOptions);
+}
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".fade-in").forEach((el) => {
-    el.style.opacity = "0";
-    el.style.transform = "translateY(20px)";
-    el.style.transition = "all 0.6s ease-out";
-    observer.observe(el);
+// ==================== Yes Button Handler ====================
+function setupYesButton() {
+  const yesButton = document.getElementById("yesButton");
+
+  yesButton.addEventListener("click", () => {
+    // Hide proposal section
+    document.getElementById("proposalSection").style.display = "none";
+
+    // Show final section
+    document.getElementById("finalSection").style.display = "flex";
+
+    // Create confetti
+    createConfetti();
+
+    // Scroll to final section
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // Trigger heart explosions
+    createHeartExplosion();
   });
+}
+
+// ==================== Heart Explosion ====================
+function createHeartExplosion() {
+  const container = document.getElementById("confetti");
+
+  for (let i = 0; i < 30; i++) {
+    const heart = document.createElement("div");
+    const angle = (i / 30) * Math.PI * 2;
+    const velocity = 5 + Math.random() * 5;
+    const vx = Math.cos(angle) * velocity;
+    const vy = Math.sin(angle) * velocity;
+
+    heart.textContent = "❤️";
+    heart.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            font-size: 20px;
+            pointer-events: none;
+            z-index: 101;
+        `;
+
+    container.appendChild(heart);
+
+    let x = window.innerWidth / 2;
+    let y = window.innerHeight / 2;
+    let velX = vx;
+    let velY = vy - 2;
+    let life = 2;
+
+    function animate() {
+      life -= 0.016;
+      x += velX;
+      y += velY;
+      velY += 0.1; // gravity
+
+      heart.style.transform = `translate(${x - 10}px, ${y - 10}px)`;
+      heart.style.opacity = life;
+
+      if (life > 0) {
+        requestAnimationFrame(animate);
+      } else {
+        heart.remove();
+      }
+    }
+
+    animate();
+  }
+}
+
+// ==================== Smooth Scroll Enhancement ====================
+function smoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute("href"));
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
+    });
+  });
+}
+
+// ==================== Mobile Optimization ====================
+function optimizeForMobile() {
+  if (window.innerWidth < 768) {
+    // Reduce particle count for mobile
+    document.querySelectorAll(".particles").forEach((el) => {
+      el.querySelectorAll("div").forEach((div, i) => {
+        if (i > 15) div.remove();
+      });
+    });
+  }
+}
+
+// ==================== Initialize All ====================
+document.addEventListener("DOMContentLoaded", () => {
+  // Disable animations on mobile if needed for performance
+  const isMobile = window.innerWidth < 768;
+
+  createParticles();
+  createSparkles();
+  observeElements();
+  setupMusicToggle();
+  setupYesButton();
+  smoothScroll();
+
+  if (isMobile) {
+    optimizeForMobile();
+  }
+
+  // Hide scroll indicator after first scroll
+  let hasScrolled = false;
+  window.addEventListener("scroll", () => {
+    if (!hasScrolled && window.scrollY > 100) {
+      document.querySelector(".scroll-indicator").style.opacity = "0";
+      document.querySelector(".scroll-indicator").style.pointerEvents = "none";
+      hasScrolled = true;
+    }
+  });
+});
+
+// Handle window resize for responsiveness
+window.addEventListener("resize", () => {
+  optimizeForMobile();
 });
