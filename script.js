@@ -1,321 +1,192 @@
-// Optimize performance with requestAnimationFrame
-let animationFrame;
+// Typing Animation
+const typingMessages = [
+  "Urmila, you have the purest heart and the most beautiful soul.",
+  "Every moment with you feels like a blessing.",
+  "I may not be perfect, but my feelings for you are absolutely real and true.",
+  "You inspire me to be a better person every single day.",
+  "Your smile is my favorite thing to see.",
+  "Being with you feels like home.",
+];
 
-// ==================== Particle System ====================
-function createParticles() {
-  const container = document.getElementById("particlesContainer");
-  if (!container) return;
+let messageIndex = 0;
 
-  for (let i = 0; i < 30; i++) {
-    const particle = document.createElement("div");
-    particle.style.cssText = `
-            position: absolute;
-            width: ${Math.random() * 4 + 2}px;
-            height: ${Math.random() * 4 + 2}px;
-            background: ${
-              [
-                "rgba(231, 84, 128, 0.5)",
-                "rgba(212, 165, 217, 0.5)",
-                "rgba(244, 212, 168, 0.5)",
-              ][Math.floor(Math.random() * 3)]
-            };
-            border-radius: 50%;
-            top: ${Math.random() * 100}%;
-            left: ${Math.random() * 100}%;
-            animation: particleFloat ${Math.random() * 8 + 4}s linear infinite;
-            pointer-events: none;
-        `;
-    container.appendChild(particle);
+function typeMessage() {
+  const typingElement = document.getElementById("typingText");
+  if (!typingElement) return;
+
+  const message = typingMessages[messageIndex];
+  typingElement.textContent = "";
+  let charIndex = 0;
+
+  function typeChar() {
+    if (charIndex < message.length) {
+      typingElement.textContent += message[charIndex];
+      charIndex++;
+      setTimeout(typeChar, 50);
+    } else {
+      setTimeout(() => {
+        messageIndex = (messageIndex + 1) % typingMessages.length;
+        setTimeout(typeMessage, 2000);
+      }, 3000);
+    }
   }
 
-  const style = document.createElement("style");
-  style.textContent = `
-        @keyframes particleFloat {
-            0% { transform: translateY(0px) translateX(0px); opacity: 1; }
-            100% { transform: translateY(-${
-              Math.random() * 100 + 50
-            }px) translateX(${Math.random() * 50 - 25}px); opacity: 0; }
-        }
-    `;
-  document.head.appendChild(style);
+  typeChar();
 }
 
-// ==================== Sparkles System ====================
-function createSparkles() {
-  const container = document.getElementById("sparklesContainer");
+// Heart Explosion Animation
+function createHeartExplosion(containerId) {
+  const container = document.getElementById(containerId);
   if (!container) return;
+
+  container.innerHTML = "";
 
   for (let i = 0; i < 20; i++) {
-    const sparkle = document.createElement("div");
-    sparkle.style.cssText = `
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: rgba(244, 212, 168, 0.8);
-            border-radius: 50%;
-            top: ${Math.random() * 100}%;
-            left: ${Math.random() * 100}%;
-            animation: sparkleFlash ${
-              Math.random() * 3 + 2
-            }s ease-in-out infinite;
-            pointer-events: none;
-        `;
-    container.appendChild(sparkle);
-  }
+    const heart = document.createElement("div");
+    heart.innerHTML = "💕";
+    heart.style.position = "absolute";
+    heart.style.left = "50%";
+    heart.style.top = "50%";
+    heart.style.fontSize = "30px";
+    heart.style.pointerEvents = "none";
+    heart.style.userSelect = "none";
 
-  const style = document.createElement("style");
-  style.textContent = `
-        @keyframes sparkleFlash {
-            0%, 100% { opacity: 0; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.5); }
-        }
-    `;
-  document.head.appendChild(style);
+    const angle = (i / 20) * Math.PI * 2;
+    const velocity = 5 + Math.random() * 5;
+    const tx = Math.cos(angle) * velocity * 20;
+    const ty = Math.sin(angle) * velocity * 20;
+
+    heart.animate(
+      [
+        { transform: "translate(-50%, -50%) scale(1)", opacity: 1 },
+        {
+          transform: `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(0)`,
+          opacity: 0,
+        },
+      ],
+      {
+        duration: 1500,
+        easing: "ease-out",
+      }
+    );
+
+    container.appendChild(heart);
+  }
 }
 
-// ==================== Confetti Animation ====================
+// Confetti Animation
 function createConfetti() {
-  const confettiContainer = document.getElementById("confetti");
-  confettiContainer.innerHTML = "";
+  const container = document.getElementById("confettiContainer");
+  if (!container) return;
+
+  container.innerHTML = "";
+  const colors = ["#ff6b9d", "#c984d4", "#ffd89b", "#f4d9a6", "#ff1493"];
 
   for (let i = 0; i < 50; i++) {
     const confetti = document.createElement("div");
-    const randomX = Math.random() * window.innerWidth;
-    const randomDelay = Math.random() * 0.5;
-    const randomDuration = Math.random() * 2 + 2;
+    confetti.className = "confetti";
+    confetti.innerHTML = ["💕", "💍", "✨", "🎉"][
+      Math.floor(Math.random() * 4)
+    ];
+    confetti.style.left = Math.random() * 100 + "%";
+    confetti.style.top = "-10px";
+    confetti.style.fontSize = "20px" + Math.random() * 10;
+    confetti.style.opacity = Math.random();
+    confetti.style.animation = `confettiFall ${2 + Math.random() * 2}s linear`;
+    confetti.style.animationDelay = Math.random() * 0.5 + "s";
 
-    confetti.style.cssText = `
-            position: fixed;
-            left: ${randomX}px;
-            top: -10px;
-            width: 10px;
-            height: 10px;
-            background: ${
-              ["#e75480", "#d4a5d9", "#f4d4a8"][Math.floor(Math.random() * 3)]
-            };
-            border-radius: 50%;
-            pointer-events: none;
-            animation: fall ${randomDuration}s linear ${randomDelay}s forwards;
-        `;
-    confettiContainer.appendChild(confetti);
+    container.appendChild(confetti);
+
+    setTimeout(() => confetti.remove(), (2 + Math.random() * 2 + 0.5) * 1000);
   }
-
-  const style = document.createElement("style");
-  style.textContent = `
-        @keyframes fall {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(${
-              window.innerHeight + 100
-            }px) rotate(360deg); opacity: 0; }
-        }
-    `;
-  document.head.appendChild(style);
 }
 
-// ==================== Typing Text Animation ====================
-function typeText(element, text, speed = 50) {
-  element.innerHTML = "";
-  let index = 0;
+// Music Toggle
+const musicToggle = document.getElementById("musicToggle");
+const bgMusic = document.getElementById("bgMusic");
 
-  function type() {
-    if (index < text.length) {
-      element.textContent += text[index];
-      index++;
-      setTimeout(type, speed);
-    }
-  }
-
-  type();
-}
-
-// ==================== Scroll Intersection Observer ====================
-function observeElements() {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const section = entry.target.id;
-
-          if (
-            section === "messageSection" &&
-            !entry.target.classList.contains("typed")
-          ) {
-            typeText(
-              document.getElementById("typingText"),
-              "Urmila, you have the purest heart and the most beautiful soul.\n\nEvery moment with you feels like a blessing.\n\nI may not be perfect, but my feelings for you are. 💕",
-              40
-            );
-            entry.target.classList.add("typed");
-          }
-        }
-      });
-    },
-    { threshold: 0.3 }
-  );
-
-  document.querySelectorAll("section").forEach((section) => {
-    observer.observe(section);
-  });
-}
-
-// ==================== Music Toggle ====================
-function setupMusicToggle() {
-  const musicToggle = document.getElementById("musicToggle");
-  const bgMusic = document.getElementById("bgMusic");
-
-  // Create a simple sine wave audio for romantic background music
-  function createAudio() {
-    const audioContext = new (window.AudioContext ||
-      window.webkitAudioContext)();
-    const oscillator = audioContext.createOscillator();
-    const gain = audioContext.createGain();
-
-    oscillator.connect(gain);
-    gain.connect(audioContext.destination);
-    oscillator.frequency.value = 220; // A note
-    gain.gain.setValueAtTime(0.1, audioContext.currentTime);
-    oscillator.start(audioContext.currentTime);
-    oscillator.stop(audioContext.currentTime + 2);
-  }
-
-  let isPlaying = false;
-
+if (musicToggle && bgMusic) {
   musicToggle.addEventListener("click", () => {
-    isPlaying = !isPlaying;
-    musicToggle.classList.toggle("playing", isPlaying);
-
-    if (isPlaying) {
-      musicToggle.textContent = "🎵";
+    if (bgMusic.paused) {
+      bgMusic.play().catch(() => {
+        console.log("[v0] Audio playback failed");
+      });
+      musicToggle.classList.add("playing");
     } else {
-      musicToggle.textContent = "🎵";
+      bgMusic.pause();
+      musicToggle.classList.remove("playing");
     }
   });
 }
 
-// ==================== Yes Button Handler ====================
-function setupYesButton() {
-  const yesButton = document.getElementById("yesButton");
+// Yes Button Handler
+const yesBtn = document.getElementById("yesBtn");
+if (yesBtn) {
+  yesBtn.addEventListener("click", () => {
+    document.body.style.overflow = "hidden";
 
-  yesButton.addEventListener("click", () => {
-    // Hide proposal section
-    document.getElementById("proposalSection").style.display = "none";
-
-    // Show final section
-    document.getElementById("finalSection").style.display = "flex";
-
-    // Create confetti
+    createHeartExplosion("heartExplosion");
     createConfetti();
 
-    // Scroll to final section
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    setTimeout(() => {
+      const celebration = document.getElementById("celebration");
+      if (celebration) {
+        celebration.classList.add("show");
+        celebration.scrollIntoView({ behavior: "smooth" });
+        document.body.style.overflow = "auto";
 
-    // Trigger heart explosions
-    createHeartExplosion();
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }, 500);
+      }
+    }, 800);
   });
 }
 
-// ==================== Heart Explosion ====================
-function createHeartExplosion() {
-  const container = document.getElementById("confetti");
+// No Button Handler
+const noBtn = document.getElementById("noBtn");
+if (noBtn) {
+  noBtn.addEventListener("click", () => {
+    noBtn.textContent = "Try Again! 💕";
+    noBtn.style.background =
+      "linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)";
+    noBtn.style.color = "white";
+    noBtn.style.border = "none";
 
-  for (let i = 0; i < 30; i++) {
-    const heart = document.createElement("div");
-    const angle = (i / 30) * Math.PI * 2;
-    const velocity = 5 + Math.random() * 5;
-    const vx = Math.cos(angle) * velocity;
-    const vy = Math.sin(angle) * velocity;
-
-    heart.textContent = "❤️";
-    heart.style.cssText = `
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            font-size: 20px;
-            pointer-events: none;
-            z-index: 101;
-        `;
-
-    container.appendChild(heart);
-
-    let x = window.innerWidth / 2;
-    let y = window.innerHeight / 2;
-    let velX = vx;
-    let velY = vy - 2;
-    let life = 2;
-
-    function animate() {
-      life -= 0.016;
-      x += velX;
-      y += velY;
-      velY += 0.1; // gravity
-
-      heart.style.transform = `translate(${x - 10}px, ${y - 10}px)`;
-      heart.style.opacity = life;
-
-      if (life > 0) {
-        requestAnimationFrame(animate);
-      } else {
-        heart.remove();
-      }
-    }
-
-    animate();
-  }
-}
-
-// ==================== Smooth Scroll Enhancement ====================
-function smoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute("href"));
-      if (target) {
-        target.scrollIntoView({ behavior: "smooth" });
-      }
-    });
+    setTimeout(() => {
+      noBtn.textContent = "No";
+      noBtn.style.background = "white";
+      noBtn.style.color = "var(--dark)";
+      noBtn.style.border = "2px solid var(--dark)";
+    }, 2000);
   });
 }
 
-// ==================== Mobile Optimization ====================
-function optimizeForMobile() {
-  if (window.innerWidth < 768) {
-    // Reduce particle count for mobile
-    document.querySelectorAll(".particles").forEach((el) => {
-      el.querySelectorAll("div").forEach((div, i) => {
-        if (i > 15) div.remove();
-      });
-    });
-  }
-}
-
-// ==================== Initialize All ====================
+// Initialize on load
 document.addEventListener("DOMContentLoaded", () => {
-  // Disable animations on mobile if needed for performance
-  const isMobile = window.innerWidth < 768;
+  typeMessage();
 
-  createParticles();
-  createSparkles();
-  observeElements();
-  setupMusicToggle();
-  setupYesButton();
-  smoothScroll();
-
-  if (isMobile) {
-    optimizeForMobile();
-  }
-
-  // Hide scroll indicator after first scroll
-  let hasScrolled = false;
-  window.addEventListener("scroll", () => {
-    if (!hasScrolled && window.scrollY > 100) {
-      document.querySelector(".scroll-indicator").style.opacity = "0";
-      document.querySelector(".scroll-indicator").style.pointerEvents = "none";
-      hasScrolled = true;
-    }
+  // Smooth scrolling for scroll indicator
+  document.querySelector(".scroll-indicator")?.addEventListener("click", () => {
+    document.getElementById("messages").scrollIntoView({ behavior: "smooth" });
   });
 });
 
-// Handle window resize for responsiveness
-window.addEventListener("resize", () => {
-  optimizeForMobile();
+// Intersection Observer for animations
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: "0px 0px -100px 0px",
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.style.animation =
+        entry.target.style.animation || "slideInUp 0.8s ease-out forwards";
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll(".reason-card, .timeline-item").forEach((el) => {
+  observer.observe(el);
 });

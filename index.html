@@ -3,158 +3,189 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Urmila, You Are My Reason to Smile ✨</title>
+    <title>Urmila, Will You Marry Me? 💕</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- Music Toggle Button -->
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="stars"></div>
+      <div class="hero-content">
+        <div class="photo-frame-container">
+          <div class="photo-frame">
+            <img src="/images/urmila.jpg" alt="Urmila" />
+            <div class="frame-glow"></div>
+          </div>
+          <div class="floating-hearts"></div>
+        </div>
+        <h1 class="hero-title">
+          <span class="line-1">Urmila,</span>
+          <span class="line-2">You Are My Reason to Smile</span>
+        </h1>
+        <p class="hero-subtitle">
+          Today… I Want to Say Something From My Heart.
+        </p>
+        <div class="scroll-indicator">
+          <span>↓ Scroll Down ↓</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Message Section -->
+    <section class="message-section" id="messages">
+      <div class="section-container">
+        <div class="message-card">
+          <h2 class="section-title">A Message For You</h2>
+          <p class="typing-text" id="typingText"></p>
+          <div class="sparkles"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why I Love You Section (Surprise #1) -->
+    <section class="why-section" id="whySection">
+      <div class="section-container">
+        <h2 class="section-title">Why I Love You So Much</h2>
+        <div class="reasons-grid">
+          <div class="reason-card" style="--delay: 0s">
+            <span class="reason-number">01</span>
+            <h3>Your Beautiful Soul</h3>
+            <p>You light up every room with your kindness and warmth</p>
+          </div>
+          <div class="reason-card" style="--delay: 0.2s">
+            <span class="reason-number">02</span>
+            <h3>Your Genuine Heart</h3>
+            <p>Every moment with you feels like a blessing</p>
+          </div>
+          <div class="reason-card" style="--delay: 0.4s">
+            <span class="reason-number">03</span>
+            <h3>Your Perfect Smile</h3>
+            <p>It makes my heart skip a beat every single time</p>
+          </div>
+          <div class="reason-card" style="--delay: 0.6s">
+            <span class="reason-number">04</span>
+            <h3>Your Strength</h3>
+            <p>You inspire me to be better every day</p>
+          </div>
+          <div class="reason-card" style="--delay: 0.8s">
+            <span class="reason-number">05</span>
+            <h3>Your Laughter</h3>
+            <p>The sweetest sound that makes everything worthwhile</p>
+          </div>
+          <div class="reason-card" style="--delay: 1s">
+            <span class="reason-number">06</span>
+            <h3>You Complete Me</h3>
+            <p>With you, I found my forever person</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Photo Gallery Section (Surprise #2) -->
+    <section class="gallery-section" id="gallery">
+      <div class="section-container">
+        <h2 class="section-title">Our Beautiful Moments</h2>
+        <div class="gallery-container">
+          <div class="photo-display">
+            <img src="/images/urmila.jpg" alt="Urmila" class="main-photo" />
+            <div class="photo-glow"></div>
+          </div>
+          <div class="gallery-info">
+            <h3>Every Moment With You</h3>
+            <p>
+              Is a moment I treasure forever. Your presence in my life has
+              changed everything for the better.
+            </p>
+            <div class="hearts-animation"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Love Story Section (Surprise #3) -->
+    <section class="love-story" id="loveStory">
+      <div class="section-container">
+        <h2 class="section-title">Our Love Story</h2>
+        <div class="story-timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>The Beginning</h3>
+              <p>
+                The moment I saw you, I knew my life was about to change forever
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Falling Deeper</h3>
+              <p>
+                Every day with you makes me fall more in love with your spirit
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Forever Yours</h3>
+              <p>Now, I want to spend the rest of my life making you smile</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Proposal Section -->
+    <section class="proposal-section" id="proposal">
+      <div class="proposal-glow"></div>
+      <div class="section-container">
+        <h2 class="proposal-title">Urmila...</h2>
+        <h1 class="main-proposal">Will You Marry Me?</h1>
+        <p class="proposal-subtitle">
+          I want to make you smile again.<br />I want to hold your heart
+          gently.<br />I want to be the person you feel safe with.
+        </p>
+
+        <div class="button-container">
+          <button class="yes-btn" id="yesBtn">Yes, I Will! 💍</button>
+          <button class="no-btn" id="noBtn">No</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Celebration Section (Hidden, Shows on Yes) -->
+    <section class="celebration" id="celebration">
+      <div class="section-container">
+        <div class="celebration-content">
+          <div class="confetti-container" id="confettiContainer"></div>
+          <h1 class="celebration-title">YES! 💕</h1>
+          <div class="heart-explosion" id="heartExplosion"></div>
+          <h2 class="message-to-her">
+            You Just Made Me The Happiest Man Alive!
+          </h2>
+          <p class="final-message">
+            Thank you, Urmila. You just made my world perfect. I love you more
+            than words could ever express. Let's build an amazing future
+            together. Forever is not long enough for me to love you. 🌹✨
+          </p>
+          <div class="final-hearts"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Music Toggle -->
     <button class="music-toggle" id="musicToggle" title="Toggle Music">
       🎵
     </button>
-    <audio id="bgMusic" loop preload="auto">
+
+    <!-- Music -->
+    <audio id="bgMusic" loop>
       <source
         src="data:audio/wav;base64,UklGRiYAAABXQVZFZm10IBAAAAABAAEAQB8AAAB9AAACABAAZGF0YQIAAAAAAA=="
         type="audio/wav"
       />
     </audio>
-
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-      <div class="particles" id="particlesContainer"></div>
-
-      <div class="hero-content">
-        <div class="photo-frame">
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/urmila-AFCPZH6zY76o6C5hZuzAbDydPjOC3O.jpg"
-            alt="Urmila"
-            class="hero-photo"
-          />
-          <div class="glow-border"></div>
-          <div class="heart-decorations">
-            <span class="floating-heart">❤️</span>
-            <span class="floating-heart">💕</span>
-            <span class="floating-heart">✨</span>
-          </div>
-        </div>
-
-        <h1 class="hero-title">
-          Urmila, You Are My<br /><span class="highlight">Reason to Smile</span>
-        </h1>
-        <p class="hero-subtitle">
-          Today… I Want to Say Something From My Heart.
-        </p>
-      </div>
-
-      <div class="scroll-indicator">
-        <span class="bounce">↓</span>
-      </div>
-    </section>
-
-    <!-- Message Section -->
-    <section class="message-section" id="messageSection">
-      <div class="sparkles" id="sparklesContainer"></div>
-
-      <div class="message-content">
-        <h2>A Message For You</h2>
-        <p class="typing-text" id="typingText"></p>
-        <div class="divider"></div>
-      </div>
-    </section>
-
-    <!-- Memories Section -->
-    <section class="memories-section" id="memoriesSection">
-      <h2>Our Memories</h2>
-      <div class="memory-card">
-        <div class="memory-image-wrapper">
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/urmila-AFCPZH6zY76o6C5hZuzAbDydPjOC3O.jpg"
-            alt="Our Memory"
-            class="memory-image"
-          />
-          <div class="memory-overlay">
-            💕 Every Moment With You is Special 💕
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Surprise Section 1: Timeline -->
-    <section class="timeline-section" id="timelineSection">
-      <h2>Why I Love You</h2>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
-            <h3>Your Pure Heart ❤️</h3>
-            <p>You see the good in everyone and bring light wherever you go.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
-            <h3>Your Beautiful Soul ✨</h3>
-            <p>Every moment with you feels like a blessing I don't deserve.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
-            <h3>Your Kind Smile 😊</h3>
-            <p>Your smile has the power to heal my darkest days.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Proposal Section -->
-    <section class="proposal-section" id="proposalSection">
-      <div class="proposal-glow"></div>
-      <div class="proposal-content">
-        <h2>Urmila...</h2>
-        <h1 class="proposal-heading">Will You Give Me<br />Another Chance?</h1>
-        <p class="proposal-subtitle">Will You Let Me Love You Better?</p>
-
-        <div class="proposal-message">
-          <p>🌹 I want to make you smile again.</p>
-          <p>🌹 I want to hold your heart gently.</p>
-          <p>🌹 I want to be the person you feel safe with.</p>
-          <p style="margin-top: 20px; font-size: 16px; opacity: 0.9">
-            If you say YES, I promise to love you with all my heart, treasure
-            every moment, and make every day special for you. ✨
-          </p>
-        </div>
-
-        <button class="yes-button" id="yesButton">Yes, I Will 💖</button>
-      </div>
-    </section>
-
-    <!-- Final Message Section (Hidden) -->
-    <section class="final-section" id="finalSection" style="display: none">
-      <div class="confetti" id="confetti"></div>
-      <div class="final-content">
-        <h1 class="celebration-text">🎉 YES! 🎉</h1>
-        <h2>Urmila...</h2>
-        <p class="final-message">Thank you for giving me another chance.</p>
-        <p class="final-message">You just made my world perfect. ✨💕</p>
-        <p class="final-message" style="margin-top: 30px; font-size: 18px">
-          I promise to love you unconditionally,<br />cherish every moment,<br />and
-          make your happiness my priority.
-        </p>
-        <p
-          class="final-message"
-          style="margin-top: 40px; font-size: 24px; font-weight: 300"
-        >
-          Forever Yours,<br /><span style="font-size: 28px; font-weight: 400"
-            >❤️ Shubham</span
-          >
-        </p>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <p>Made with Love by Shubham ❤️ For Urmila</p>
-    </footer>
 
     <script src="script.js"></script>
   </body>
