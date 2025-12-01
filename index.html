@@ -3,159 +3,116 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Urmila, You Are My Reason to Smile ✨</title>
+    <title>A Special Message For Urmila 💖</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <!-- Cursor Hearts Trail -->
-    <div id="cursor-trail"></div>
+    <!-- Optimized Background Particles -->
+    <div class="particles-container" id="particlesContainer"></div>
 
-    <!-- Floating Particles Background -->
-    <div id="particles-container"></div>
-
-    <!-- Music Toggle Button -->
-    <button id="music-toggle" class="music-toggle">
-      <span class="music-icon">♪</span>
+    <!-- Music Toggle -->
+    <button class="music-toggle" id="musicToggle" title="Toggle Music">
+      🎵
     </button>
-
-    <!-- Audio Element -->
-    <audio id="background-music" loop>
+    <audio id="backgroundMusic" loop preload="none">
       <source
-        src="data:audio/wav;base64,UklGRiYAAABXQVZFZm10IBAAAAABAAEAQB8AAAB9AAACABAAZGF0YQIAAAAAAA=="
-        type="audio/wav"
+        src="https://assets.mixkit.co/active_storage/sfx/2822/2822-preview.mp3"
+        type="audio/mpeg"
       />
     </audio>
 
-    <!-- Secret Love Meter -->
-    <div id="love-meter" class="love-meter">
-      <div class="meter-header">
-        💕 Compatibility: <span id="compatibility-percent">0</span>%
-      </div>
-      <div class="meter-bar">
-        <div class="meter-fill"></div>
-      </div>
-    </div>
-
-    <!-- ===== SECTION 1: HERO ===== -->
-    <section class="hero" id="hero">
+    <!-- Hero Section -->
+    <section class="hero">
       <div class="hero-content">
-        <div class="photo-frame">
+        <div class="hero-text">
+          <h1 class="glitch" data-text="Urmila">Urmila</h1>
+          <p class="hero-subtitle">You Are My Reason to Smile</p>
+          <p class="hero-description">
+            Today… I Want to Say Something From My Heart.
+          </p>
+        </div>
+        <div class="hero-image-container">
           <img
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/urmila-FvGSwR2f1dmaNCUeLjixow9QtHAu8f.jpg"
             alt="Urmila"
-            class="hero-photo"
+            class="hero-image"
           />
-          <div class="frame-glow"></div>
-        </div>
-
-        <div class="hero-text">
-          <h1
-            class="hero-title glitch"
-            data-text="Urmila, You Are My Reason to Smile."
-          >
-            Urmila, You Are My Reason to Smile.
-          </h1>
-          <p class="hero-subtitle">
-            Today… I Want to Say Something From My Heart. 💖
-          </p>
+          <div class="glow-border"></div>
         </div>
       </div>
-
-      <div class="scroll-arrow bounce">
-        <span>↓</span>
+      <div class="scroll-indicator">
+        <span class="arrow">↓</span>
       </div>
-
-      <!-- Floating Hearts -->
-      <div class="floating-hearts"></div>
     </section>
 
-    <!-- ===== SECTION 2: MESSAGE ===== -->
-    <section class="message-section" id="message-section">
+    <!-- Message Section -->
+    <section class="message-section">
       <div class="message-container">
-        <div class="sparkle-bg"></div>
-        <p class="typing-text" id="typing-text">
-          Urmila, you have the purest heart and the most beautiful soul.<br />
-          Every moment with you feels like a blessing.<br />
-          I may not be perfect, but my feelings for you are. ❤️
-        </p>
+        <h2>You Are Special</h2>
+        <p class="typing-text" id="typingText"></p>
+        <div class="sparkles-light"></div>
       </div>
     </section>
 
-    <!-- ===== SECTION 3: LOVE LETTER MODAL ===== -->
-    <div id="love-letter" class="love-letter-modal">
-      <button class="close-letter">✕</button>
-      <div class="letter-content">
-        <p class="letter-header">💌 A Love Letter</p>
-        <p>Dear Urmila,</p>
-        <p>
-          Every day with you is a gift. Your smile lights up my world, and your
-          presence makes everything beautiful. You inspire me to be a better
-          person. I cherish every moment we share, and I can't wait to create a
-          thousand more memories with you.
-        </p>
-        <p>Forever yours,<br />Shubham ❤️</p>
-      </div>
-    </div>
-
-    <!-- ===== SECTION 4: MEMORIES ===== -->
-    <section class="memories-section" id="memories-section">
-      <div class="memories-container">
-        <h2 class="section-title">Our Beautiful Moments 🌹</h2>
-        <div class="memory-card fade-in-up">
+    <!-- Memories Section -->
+    <section class="memories-section">
+      <h2>Our Beautiful Moments</h2>
+      <div class="memories-grid">
+        <div class="memory-card fade-in">
           <img
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/urmila-FvGSwR2f1dmaNCUeLjixow9QtHAu8f.jpg"
-            alt="Our Memory"
+            alt="Memory 1"
           />
-          <div class="memory-overlay">
-            <p>Forever in my heart</p>
-          </div>
+          <p>You Make Everything Beautiful</p>
         </div>
-        <div class="bubble-messages"></div>
+        <div class="memory-card fade-in">
+          <img
+            src="https://placeholder.svg?height=300&width=300&query=romantic+sunset"
+            alt="Memory 2"
+          />
+          <p>Every Moment With You Is Special</p>
+        </div>
+        <div class="memory-card fade-in">
+          <img
+            src="https://placeholder.svg?height=300&width=300&query=romantic+couple"
+            alt="Memory 3"
+          />
+          <p>You're My Greatest Blessing</p>
+        </div>
       </div>
     </section>
 
-    <!-- ===== SECTION 5: PROPOSAL ===== -->
-    <section class="proposal-section" id="proposal-section">
+    <!-- Proposal Section -->
+    <section class="proposal-section">
       <div class="proposal-container">
-        <div class="rings-animation"></div>
-        <h2 class="proposal-title glow-text">
-          Urmila, Will You Give Me Another Chance?
-        </h2>
-        <h3 class="proposal-subtitle">Will You Let Me Love You Better?</h3>
+        <h2 class="proposal-title">Urmila</h2>
+        <p class="proposal-subtitle">Will You Give Me Another Chance?</p>
+        <p class="proposal-text">
+          I want to make you smile again.<br />I want to hold your heart
+          gently.<br />I want to be the person you feel safe with.
+        </p>
+        <button class="proposal-button" id="proposalButton">
+          Yes, I Will 💖
+        </button>
+      </div>
+      <div class="floating-hearts-container" id="floatingHeartsContainer"></div>
+    </section>
 
-        <div class="proposal-message">
-          <p>💝 I want to make you smile again.</p>
-          <p>💝 I want to hold your heart gently.</p>
-          <p>💝 I want to be the person you feel safe with.</p>
-        </div>
-
-        <div class="floating-hearts-proposal"></div>
+    <!-- Celebration Section (Hidden) -->
+    <section class="celebration-section" id="celebrationSection">
+      <div class="celebration-content">
+        <h2>Urmila</h2>
+        <p>Thank you for saying YES!</p>
+        <p class="celebration-subtitle">You just made my world perfect.</p>
+        <p class="celebration-note">Made with Love by Shubham ❤️</p>
       </div>
     </section>
 
-    <!-- ===== SECTION 6: YES BUTTON ===== -->
-    <section class="button-section" id="button-section">
-      <button id="yes-button" class="yes-button">
-        <span class="button-text">Yes, I Will 💖</span>
-        <span class="button-glow"></span>
-      </button>
-    </section>
-
-    <!-- ===== FINAL MESSAGE ===== -->
-    <div id="final-message" class="final-message hidden">
-      <div class="message-box">
-        <h1 class="message-title">🎉 YES! 🎉</h1>
-        <p class="message-text">
-          Thank you, Urmila. You just made my world perfect.
-        </p>
-        <p class="message-subtext">
-          I love you more than words can express. 💕
-        </p>
-        <p class="message-footer">Forever yours, Shubham ❤️</p>
-      </div>
-    </div>
-
-    <!-- ===== FOOTER ===== -->
+    <!-- Footer -->
     <footer class="footer">
       <p>Made with Love by Shubham ❤️ For Urmila</p>
     </footer>
